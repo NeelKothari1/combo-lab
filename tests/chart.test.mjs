@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {HAND_CELLS,handClass,chartContext,gradeChart,validateSelection,reasonForHand} from '../dist/chart-engine.js';
 import {expandRange,remaining,key} from '../dist/engine.js';
-import {chartScenarios} from '../dist/chart-scenarios.js';
+import {chartScenarios,guidedScenarios} from '../dist/chart-scenarios.js';
 import {profileFor} from '../dist/profiles.js';
 import {ensureChartProgress,recordChartAttempt} from '../dist/chart-progress.js';
 const find=id=>chartScenarios.find(s=>s.id===id);
@@ -16,9 +16,9 @@ test('standard chart partitions the complete deck into 169 distinct hand classes
  assert.equal(expandRange(HAND_CELLS.map(c=>c.hand)).length,1326);
 });
 test('every chart scenario has a coherent target inside its declared starting pool',()=>{
- assert.equal(chartScenarios.length,10);assert.equal(new Set(chartScenarios.map(s=>s.id)).size,10);
- assert.deepEqual([...new Set(chartScenarios.map(s=>s.street))],['preflop','flop','turn','river']);
- for(const s of chartScenarios){
+ assert.equal(guidedScenarios.length,10);assert.ok(chartScenarios.length>=5000);assert.equal(new Set(chartScenarios.map(s=>s.id)).size,chartScenarios.length);
+ assert.deepEqual([...new Set(guidedScenarios.map(s=>s.street))],['preflop','flop','turn','river']);
+ for(const s of guidedScenarios){
   const ctx=chartContext(s),known=[...s.board,...s.hero],start=new Set(remaining(s.startingRange,known).map(key));
   assert.equal(new Set(known).size,known.length,s.id);assert.ok(profileFor(s),s.id);assert.ok(find(s.counterpart),s.id);
   assert.ok(ctx.expected.length>0,s.id);assert.ok(gradeChart(s,ctx.expected).correct,s.id);

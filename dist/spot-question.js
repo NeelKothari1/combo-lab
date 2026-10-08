@@ -8,7 +8,7 @@ export function buildSpotQuestion({scenario:s,selected=[],result=null,hand='',qu
   `My question: ${question.trim()||'Help me understand which hands fit this opponent’s betting range and why.'}`,
   ...(hand?[`Hand I want to discuss: ${hand}`]:[]),
   `Spot: ${s.title} (${s.id})`,
-  `Game: 6-max no-limit hold’em, 50bb effective stacks, no rake. Street: ${s.street}.`,
+  `Game: 6-max no-limit hold’em, ${s.effectiveStackBB||50}bb effective stacks, no rake. Street: ${s.street}.`,
   `Hero: ${s.hero.join(' ')} in ${s.heroPosition}. Villain: ${s.villainPosition}. Board: ${s.board.join(' ')||'No board yet'}. Pot after villain’s bet: ${s.potAfterBet}bb.`,
   'Action history:',...s.history.map(([street,line])=>`${street}: ${line}`),
   `Villain: ${p.name} — ${p.style}. ${p.sample}.`,

@@ -46,10 +46,10 @@ const coaching={
 
 export function explainHand(s,hand,ctx=chartContext(s)){
  const p=profileFor(s),known=[...s.board,...s.hero];
- const modelBefore=expandRange(s.range).filter(c=>handClass(c)===hand);
+ const modelBefore=ctx.beforeTarget.get(hand)||[];
  const removed=modelBefore.filter(c=>c.some(card=>known.includes(card)));
  const live=ctx.target.get(hand)||[];
- const group=s.groups.find(g=>expandRange(g.tokens).some(c=>handClass(c)===hand));
+ const group=ctx.groupCandidates.get(hand)?.[0]?.group;
  const coachingNote=coaching[s.profileId]?.[group?.id];
  let kind='action',title='Does not take this betting line',reason=coachingNote?.[0]||reasonForHand(s,hand,ctx);
  if(live.length){kind='included';title='Fits the working betting range';reason=reasonForHand(s,hand,ctx)}

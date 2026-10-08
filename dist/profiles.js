@@ -42,7 +42,7 @@ const assignments={
  'flush-removal':'value','missed-draw':'bluffer','block-bluffs':'bluffer','straight-blocker':'value',
  'unblock-straights':'bluffer','turn-flushdraw':'pressure','full-house':'value'
 };
-export function profileFor(scenario){return profiles[scenario.profileId||assignments[scenario.id]];}
+export function profileFor(scenario){return scenario.profile||profiles[scenario.profileId||assignments[scenario.id]];}
 
 Object.assign(profiles, {
   "selective3bet": {

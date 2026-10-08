@@ -1,5 +1,6 @@
 import {tendencyScenarios} from './tendency-scenarios.js';
 import {extraChartScenarios} from './chart-extra-scenarios.js';
+import {expandedScenarios} from './scenario-library.js';
 const hints={
  'read-selective-3bet':'Separate hands this opponent has shown reraising from the hands they have shown calling. A suited and an offsuit version occupy separate cells.',
  'read-wide-3bet':'This player has shown light 3-bets, but a wide range still needs a cutoff. Consider premiums, medium pairs, suited broadways, and low suited aces.',
@@ -18,5 +19,6 @@ const baseChartScenarios=tendencyScenarios.map(s=>({
  alternative:s.alternative,comparison:s.comparison
 }));
 const streetOrder=['preflop','flop','turn','river'];
-export const chartScenarios=[...baseChartScenarios,...extraChartScenarios].sort((a,b)=>streetOrder.indexOf(a.street)-streetOrder.indexOf(b.street));
+export const guidedScenarios=[...baseChartScenarios,...extraChartScenarios].sort((a,b)=>streetOrder.indexOf(a.street)-streetOrder.indexOf(b.street)).map(s=>({...s,collection:'guided',difficulty:s.street==='preflop'?'Foundation':'Applied',style:s.profileId==='wide3bet'||s.profileId==='flopFrequent'?'broad':['pressure','bluffer'].includes(s.profileId)?'active':'cautious',situation:'guided',effectiveStackBB:50}));
+export const chartScenarios=[...guidedScenarios,...expandedScenarios];
 export const streets={all:'All streets',preflop:'Preflop',flop:'Flop',turn:'Turn',river:'River'};

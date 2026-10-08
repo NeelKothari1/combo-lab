@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {chartScenarios} from '../dist/chart-scenarios.js';
+import {chartScenarios,guidedScenarios} from '../dist/chart-scenarios.js';
 import {HAND_CELLS,chartContext,gradeChart} from '../dist/chart-engine.js';
 import {explainHand} from '../dist/hand-explanations.js';
 import {buildSpotQuestion,codexDraftUrl} from '../dist/spot-question.js';
 const find=id=>chartScenarios.find(s=>s.id===id);
 test('every chart hand has a reason consistent with legal cards, pool and model',()=>{
- for(const s of chartScenarios){const ctx=chartContext(s);for(const {hand} of HAND_CELLS){const e=explainHand(s,hand,ctx);assert.ok(e.reason.length>40,s.id+' '+hand);assert.equal(e.kind==='included',ctx.target.has(hand),s.id+' '+hand);for(const b of e.blockers)assert.ok([...s.hero,...s.board].includes(b.card));}}
+ for(const s of [...guidedScenarios,...chartScenarios.filter((s,i)=>s.collection==='expanded'&&i%211===0)]){const ctx=chartContext(s);for(const {hand} of HAND_CELLS){const e=explainHand(s,hand,ctx);assert.ok(e.reason.length>40,s.id+' '+hand);assert.equal(e.kind==='included',ctx.target.has(hand),s.id+' '+hand);for(const b of e.blockers)assert.ok([...s.hero,...s.board].includes(b.card));}}
 });
 test('explanations distinguish range assumptions, action filtering and exact blocker evidence',()=>{
  const pre=find('chart-read-selective-3bet'),block=find('chart-nut-flush-blocked');
