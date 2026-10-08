@@ -35,3 +35,15 @@ Browser-local progress uses `combo-lab-progress-v1`. Chart records live in a sep
 - `dist/app.js` implements the UI, keyboard navigation, and optional feature-detected WebMCP tools.
 
 WebMCP tools mirror visible controls: read_training_state, start_practice, select_range_hands, submit_range_chart, and next_practice_hand. Reading an unanswered exercise does not reveal its target.
+
+## Explanations and Ask Codex
+
+After checking, incorrect selections are explained automatically, with a profile clue and a specific reasoning adjustment. Card-removal explanations name the blocking cards and the exact removed combinations. Selections outside the starting pool are identified as an exercise assumption rather than a deduction from the bet. Extra selections appear first; missed-hand explanations can also be expanded.
+
+Ask Codex opens a question panel for the whole spot or an individual hand. Its documented `codex://new?prompt=` handoff opens a new local draft with the complete context; the user sends it in Codex. Replies appear in Codex, not in the website. Copy question + spot supports continuing an existing chat and has a manual-copy fallback. This is not an embedded inference service and requires no API credential.
+
+Before grading, the draft includes only the visible spot, starting pool, observations, and selection; it omits hidden answers. After grading, it includes the reference assumptions and feedback. Opening/copying a draft before checking marks the chart assisted. `read_spot_question` exposes the prepared draft to a browser agent only while the panel is open.
+
+- `dist/hand-explanations.js` separates modeled action exclusions from exact card removal.
+- `dist/spot-question.js` prepares context and encodes the Codex draft URL.
+- Official handoff contract: https://learn.chatgpt.com/docs/reference/commands#deep-links
