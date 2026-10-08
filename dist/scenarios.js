@@ -1,3 +1,4 @@
+import {tendencyScenarios} from './tendency-scenarios.js';
 const histories={
  flop:[['Preflop','BTN opens to 2.5bb. SB folds. You call in the BB.'],['Flop','You check. BTN bets 2bb into 5.5bb.']],
  turn:[['Preflop','BTN opens to 2.5bb. SB folds. You call in the BB.'],['Flop','You check. BTN bets 2bb. You call.'],['Turn','You check. BTN bets 5bb into 9.5bb.']],
@@ -25,7 +26,7 @@ make('unblock-straights','Leave the missed straight draws','unblockers','Advance
 make('turn-flushdraw','Draws need the right two cards','counting','Advanced','turn','Qh Jc','Ah 9h 5c 2d','KhQh KhJh KhTh QhJh QhTh JhTh 8h7h','How many listed flush-draw combos remain?','The listed hands are exact combinations, not all suited hands. Remove only exact card collisions.','With two hearts on the board, these heart-heart hands have a flush draw. Your queen of hearts removes three listed combinations; your club jack does not block a heart jack.'),
 make('full-house','On a paired river','counting','Advanced','river','As Qc','Ah Ad 7c 2d 9h','AA 77 22 99 AK','How many listed value combos remain?','Only one ace is unaccounted for. AA needs two; AK needs only one. Count each class.','AA is impossible with three aces visible. Each board-matching pocket pair has three combinations, and AK has four. This is a selected value range, not every possible value hand.')
 ];
-export const topics={all:'All concepts',counting:'Combo counting',blockers:'Blockers',unblockers:'Unblockers'};
+export const topics={all:'All concepts',tendencies:'Reading ranges',counting:'Combo counting',blockers:'Blockers',unblockers:'Unblockers'};
 
 // Position variations preserve the same explicit card-removal problems.
 for (const scenario of scenarios) {
@@ -44,3 +45,5 @@ for (const scenario of scenarios) {
     if(scenario.street==='river')scenario.history.push(['River','CO bets 12bb into 20.5bb.']);
   }
 }
+
+scenarios.push(...tendencyScenarios);

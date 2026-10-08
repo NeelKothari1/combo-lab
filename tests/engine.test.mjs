@@ -21,7 +21,7 @@ test('dead cards, double collisions and suit-sensitive blockers',()=>{
  const r=evaluate({range:['AK'],board:[],hero:['As','Kh']});assert.equal(r.blocked.length,7);
 });
 test('all curated answers match independently computed reference counts',()=>{
- assert.deepEqual(scenarios.map(s=>evaluate(s).answer),[8,3,2,6,7,6,7,10,4,5,0,3,6,3,16,40,4,13]);
+ assert.deepEqual(scenarios.map(s=>evaluate(s).answer),[8,3,2,6,7,6,7,10,4,5,0,3,6,3,16,40,4,13,24,50,20,49,20,26]);
 });
 test('scenario invariants and independent 52-card enumeration',()=>{
  for(const s of scenarios){
