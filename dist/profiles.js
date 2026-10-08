@@ -70,3 +70,42 @@ Object.assign(profiles, {
     "caution": "The exact hand classes and 100% frequencies are specified by the exercise, not inferred from these observations."
   }
 });
+
+Object.assign(profiles, {
+  "flopSelective": {
+    "name": "Selective flop bettor",
+    "style": "Checks many flop hands",
+    "sample": "Fictional observations · 24 similar ace-high flop opportunities",
+    "observations": [
+      "Made the small continuation bet in 8 of the 24 tracked spots.",
+      "Several checked-back hands later shown were pocket pairs below the ace.",
+      "Has shown ace-pair value hands and a wheel gutshot after making this small bet."
+    ],
+    "implication": "A small bet from this player can remove more weak hands from a working range than the same bet from a frequent bettor.",
+    "caution": "Observed showdowns are incomplete. They suggest a selective betting pattern, not an exact boundary between every hand class."
+  },
+  "flopFrequent": {
+    "name": "Frequent flop bettor",
+    "style": "Uses small bets broadly",
+    "sample": "Fictional observations · 24 similar ace-high flop opportunities",
+    "observations": [
+      "Made a small continuation bet in 21 of the 24 tracked spots.",
+      "Hands later shown after these small bets include underpairs and unpaired high cards.",
+      "Uses the same small size with strong made hands."
+    ],
+    "implication": "Avoid narrowing the range too sharply merely because this player made the expected small flop bet.",
+    "caution": "A high observed betting rate is not proof that every hand bets. Small samples leave uncertainty about the weakest hands in the range."
+  },
+  "flushValue": {
+    "name": "Cautious on flush boards",
+    "style": "Strong river value",
+    "sample": "Fictional observations · 8 comparable three-suit river showdowns",
+    "observations": [
+      "The four observed river bets in this sample showed made flushes.",
+      "In two checked-back pots, the player showed sets.",
+      "Has checked back one-pair hands after betting the flop and turn."
+    ],
+    "implication": "Start with a very strong working model for this third barrel, then check which flushes your cards rule out.",
+    "caution": "Four shown bets cannot establish a literal no-bluff or flush-only strategy. Unseen hands could include other value bets or bluffs."
+  }
+});
