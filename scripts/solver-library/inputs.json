@@ -1,0 +1,45 @@
+[
+  {
+    "id": "paired-deuce", "title": "Paired river · king-high board",
+    "board": ["Kd", "8h", "4c", "2s", "2d"], "pot": 20, "stack": 40,
+    "oopRange": "AA,KK,QQ,JJ,TT,99,88,44,22,AKs,KQs,KJs,KTs,AQs,AJs,ATs,A5s,A3s,QJs,QTs,JTs,T9s,98s,87s,65s,54s,AKo,KQo",
+    "ipRange": "AA,KK,QQ,JJ,TT,99,88,44,22,AKs,KQs,KJs,KTs,K9s,AQs,AJs,ATs,A5s,A3s,QJs,QTs,JTs,T9s,98s,87s,65s,54s,AKo,KQo",
+    "heroOop": ["Kc", "Qc"], "heroIp": ["Kh", "Qd"], "betSize": "75%"
+  },
+  {
+    "id": "third-spade", "title": "Flush completes · ace-high board",
+    "board": ["As", "9s", "6d", "3c", "2s"], "pot": 24, "stack": 48,
+    "oopRange": "AA,99,66,33,22,AKs,AQs,AJs,ATs,A9s,A6s,A5s,A4s,A3s,A2s,KQs,KJs,KTs,QJs,QTs,JTs,T9s,98s,87s,76s,65s,54s,AKo,AQo,AJo:0.5",
+    "ipRange": "AA,99,66,33,22,AKs,AQs,AJs,ATs,A9s,A6s,A5s,A4s,A3s,A2s,KQs,KJs,KTs,QJs,QTs,JTs,T9s,98s,87s,76s,65s,54s,AKo,AQo,AJo:0.5",
+    "heroOop": ["Ah", "Qd"], "heroIp": ["Ac", "Qh"], "betSize": "75%"
+  },
+  {
+    "id": "missed-hearts", "title": "Hearts miss · queen-high board",
+    "board": ["Qh", "Jd", "8h", "4s", "2c"], "pot": 20, "stack": 30,
+    "oopRange": "AA,KK,QQ,JJ,88,44,22,AQs,AJs,ATs,A9s,A5s,A3s,KQs,KJs,KTs,K9s,QJs,QTs,Q9s,JTs,J9s,T9s,98s,87s,65s,54s,AQo,KQo,QTo",
+    "ipRange": "AA,KK,QQ,JJ,88,44,22,AQs,AJs,ATs,A9s,A5s,A3s,KQs,KJs,KTs,K9s,QJs,QTs,Q9s,JTs,J9s,T9s,98s,87s,65s,54s,AQo,KQo,QTo",
+    "heroOop": ["Qs", "Td"], "heroIp": ["Qc", "Tc"], "betSize": "50%"
+  },
+  {
+    "id": "connected-middle", "title": "Connected board · straight pressure",
+    "board": ["Tc", "9d", "8s", "6h", "2c"], "pot": 24, "stack": 36,
+    "oopRange": "AA,KK,QQ,JJ,TT,99,88,66,22,ATs,KTs,QJs,QTs,JTs,J9s,J8s,J7s,T9s,T8s,98s,97s,96s,87s,86s,76s,75s,65s,AJs,AQs,AKs,A5s,A4s,ATo,KTo",
+    "ipRange": "AA,KK,QQ,JJ,TT,99,88,66,22,ATs,KTs,QJs,QTs,JTs,J9s,J8s,J7s,T9s,T8s,98s,97s,96s,87s,86s,76s,75s,65s,AJs,AQs,AKs,A5s,A4s,ATo,KTo",
+    "heroOop": ["Ah", "Td"], "heroIp": ["As", "Th"], "betSize": "75%"
+  },
+  {
+    "id": "fourth-diamond", "title": "Four diamonds · suit-specific ranges",
+    "board": ["Kd", "Jd", "7d", "3c", "2d"], "pot": 20, "stack": 40,
+    "oopRange": "AA,KK,QQ,JJ,TT,99,77,33,22,AKs,AQs,AJs,ATs,A9s,A8s,A7s,A6s,A5s,A4s,A3s,A2s,KQs,KJs,KTs,QJs,QTs,JTs,T9s,98s,87s,76s,65s,54s,AKo,AQo,AJo,KQo,KJo,QJo",
+    "ipRange": "AA,KK,QQ,JJ,TT,99,77,33,22,AKs,AQs,AJs,ATs,A9s,A8s,A7s,A6s,A5s,A4s,A3s,A2s,KQs,KJs,KTs,QJs,QTs,JTs,T9s,98s,87s,76s,65s,54s,AKo,AQo,AJo,KQo,KJo,QJo",
+    "heroOop": ["Kh", "Qc"], "heroIp": ["Ks", "Qh"], "betSize": "50%"
+  },
+  {
+    "id": "double-paired", "title": "Double-paired river · narrow value",
+    "board": ["Ah", "Ac", "7s", "7d", "2h"], "pot": 16, "stack": 24,
+    "oopRange": "AA,KK,QQ,JJ,TT,99,88,77,66,55,44,33,22,AKs,AQs,AJs,ATs,A9s,A8s,A7s,A6s,A5s,A4s,A3s,A2s,KQs,KJs,KTs,QJs,QTs,JTs,97s,87s,76s,75s,AKo,AQo",
+    "ipRange": "AA,KK,QQ,JJ,TT,99,88,77,66,55,44,33,22,AKs,AQs,AJs,ATs,A9s,A8s,A7s,A6s,A5s,A4s,A3s,A2s,KQs,KJs,KTs,QJs,QTs,JTs,97s,87s,76s,75s,AKo,AQo",
+    "heroOop": ["Ks", "Kh"], "heroIp": ["Qc", "Qd"], "betSize": "75%"
+  }
+]
+

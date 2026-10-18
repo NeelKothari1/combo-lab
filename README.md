@@ -1,6 +1,6 @@
 # Combo Lab
 
-A static no-limit hold’em range-reading trainer for 50–100bb, six-handed, no-rake cash-game spots.
+A static no-limit hold’em study room with separate GTO range practice, villain-tendency exercises, and exact combo/blocker training.
 
 ## Run
 
@@ -8,7 +8,23 @@ Run `npm run dev` and open `http://localhost:4173/`. There are no dependencies o
 
 Run `npm test` for chart classification, blocker effects, scenario consistency, scoring, progress migration, and the retained combinatorics checks.
 
-## Practice
+## Three training sections
+
+- **GTO practice:** 12 solver-derived river exercises across six boards. The offline generator uses the exact-combo `b-inary/postflop-solver` engine behind WASM Postflop, pinned to `9d1509fe5077d019825f833eed04b16d342dfda1`. Each configured heads-up river game meets a measured root exploitability target of at most 0.01% of its starting pot. These solves use explicitly supplied river-start ranges, zero rake, and a restricted betting tree; they are not solved preflop-to-river strategies. Independent solver cross-validation has not been performed.
+- **Villain tendencies:** the existing 5,536 illustrative range-reading scenarios for 50–100bb six-handed cash-game contexts. These remain separate from solver exercises and retain existing chart progress.
+- **Combos & blockers:** 18 exact card-removal exercises. Navigate hand classes on the chart, select actual suit combinations, and receive a reason for each omitted or extra combo. Zero-combo answers and alternative-hole-card comparisons are supported.
+
+GTO range weights are unnormalized reach weights after the observed action, not probabilities that sum to one. The chart aggregates exact combo weights within a hand class, using all combinations legal against the board and displayed hero hand as the denominator. It grades the nearest 25-percentage-point practice step and shows the unrounded solver frequencies in feedback. This UI aggregation does not bucket hands inside the solver. The numerical reference is conditional on the configured game and root convergence is not a bound on every individual hand’s error.
+
+Each section owns its feedback, review queue, and progress. Browser storage preserves `chart` for tendencies and adds `combos` and `gto`; the older root-level history is retained.
+
+The Rust solver runs only during offline library generation. The deployed browser app receives numerical results and provenance, with no embedded solver binary, browser thread requirements, or solver service. The standalone generation tool and its AGPL notice live in `scripts/solver-library/`; see its README for the pinned dependency, compatibility configuration, and reproduction command. The engine author has suspended active development, so the dependency is pinned and should be reviewed before updates.
+
+- `dist/gto-mode.js` and `dist/solver-data.js`: weighted GTO range practice and generated reference data.
+- `dist/combo-mode.js`: exact combo selection, explanations, review, and progress.
+- `dist/training-modes.css`: section navigation and shared layout.
+
+## Villain-tendency practice
 
 Read your cards, the board, positions, the betting line, and fictional villain observations. Select individual hand classes on the standard 13×13 range chart. Pairs occupy the diagonal, suited hands the upper half, and offsuit hands the lower half. No numeric combo answer is required.
 
@@ -16,7 +32,7 @@ The library contains 5,536 spots across preflop, flop, turn, and river: ten orig
 
 Feedback marks matched, missed, and extra hand classes. Clicking a graded cell explains its inclusion or exclusion and shows exact combinations for included cells. Range-match percentage is the intersection divided by the union of selected and target classes. Hints and reveals enter mistake review; only a complete unaided match clears an exercise.
 
-## Accuracy and scope
+## Accuracy and scope of tendency exercises
 
 Observations do not uniquely determine a real opponent’s range. These are illustrative working models, not solver solutions. Each exercise has a declared starting pool and an explicit continuation model; membership is all-or-none at the exact-combination level. Frequency weights are not supported.
 
@@ -24,7 +40,7 @@ The engine expands ranges into unordered two-card combinations, removes board an
 
 ## Progress and files
 
-Browser-local progress uses `combo-lab-progress-v1`. Chart records live in a separate `chart` field; earlier combo-counting and group-selection records remain intact. Resetting chart progress does not erase earlier history. No account, backend, analytics, or monetary transactions are implemented.
+Browser-local progress uses `combo-lab-progress-v1`. Tendency chart records live in a separate `chart` field; earlier combo-counting and group-selection records remain intact. Resetting chart progress does not erase earlier history. No account, backend, analytics, or monetary transactions are implemented.
 
 - `dist/chart-scenarios.js` combines guided exercises with the generated catalog.
 - `dist/chart-extra-scenarios.js` adds flop and flush-blocker comparisons.
@@ -40,7 +56,7 @@ WebMCP tools mirror visible controls: read_training_state, start_practice, selec
 
 After checking, incorrect selections are explained automatically, with a profile clue and a specific reasoning adjustment. Card-removal explanations name the blocking cards and the exact removed combinations. Selections outside the starting pool are identified as an exercise assumption rather than a deduction from the bet. Extra selections appear first; missed-hand explanations can also be expanded.
 
-Ask Codex opens a question panel for the whole spot or an individual hand. Its documented `codex://new?prompt=` handoff opens a new local draft with the complete context; the user sends it in Codex. Replies appear in Codex, not in the website. Copy question + spot supports continuing an existing chat and has a manual-copy fallback. This is not an embedded inference service and requires no API credential.
+Ask Codex is available in all three modes. It opens a question panel for the current spot; tendency exercises also offer individual-hand shortcuts. Large solver feedback payloads use copy/paste instead of an oversized draft URL. Its documented `codex://new?prompt=` handoff opens a new local draft with the complete context; the user sends it in Codex. Replies appear in Codex, not in the website. Copy question + spot supports continuing an existing chat and has a manual-copy fallback. This is not an embedded inference service and requires no API credential.
 
 Before grading, the draft includes only the visible spot, starting pool, observations, and selection; it omits hidden answers. After grading, it includes the reference assumptions and feedback. Opening/copying a draft before checking marks the chart assisted. `read_spot_question` exposes the prepared draft to a browser agent only while the panel is open.
 
